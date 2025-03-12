@@ -106,7 +106,10 @@ Crie uma função auxiliar que encontre o índice do paciente mais urgente a ser
 
 **Dicas**:
 * Para comparar strings, você pode utilizar a função `strcmp` da biblioteca `cstring`;
-* Para facilitar legibilidade, você pode criar uma função auxiliar `int comparePatients(Patient p1, Patient p2)`.
+* Para facilitar legibilidade, você pode criar uma função auxiliar `int comparePatients(Patient p1, Patient p2)`, que retorna
+  - `1` se p1 for mais urgente que p2.
+  - `0` se p1 e p2 tiverem o mesmo nível de urgência.
+  - `1` se p2 for mais urgente que p1.
 
 **Definição da função:**
 ```cpp
@@ -129,7 +132,7 @@ void removePatient(PatientArray *pa, int index);
 ## Exercício 6: Remoção e Retorno do Próximo Paciente
 
 Crie uma função que encontre o paciente mais urgente e o remova da lista, retornando o objeto `Patient` por referência.\
-**Dica:** Utilize a função `getNextPatient` para encontrar o índice do paciente antes de removê-lo.
+**Dica:** Utilize a função `findNextPatient` para encontrar o índice do paciente antes de removê-lo.
 
 **Definição da função:**
 ```cpp
