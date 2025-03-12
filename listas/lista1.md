@@ -109,7 +109,7 @@ Crie uma função auxiliar que encontre o índice do paciente mais urgente a ser
 * Para facilitar legibilidade, você pode criar uma função auxiliar `int comparePatients(Patient p1, Patient p2)`, que retorna
   - `1` se p1 for mais urgente que p2.
   - `0` se p1 e p2 tiverem o mesmo nível de urgência.
-  - `1` se p2 for mais urgente que p1.
+  - `-1` se p2 for mais urgente que p1.
 
 **Definição da função:**
 ```cpp
