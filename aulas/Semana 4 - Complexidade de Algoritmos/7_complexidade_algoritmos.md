@@ -264,7 +264,7 @@ A seguir, temos um gráfico que compara o comportamento de algumas das complexid
 
 Aonde,
 
-$$O(1) \lt O(log(n)) \lt O(n) \lt O(n log(n)) \lt O(n^2) \lt O(n) \lt O(n^3) \lt O(c^n) \lt O(n!)$$
+$$O(1) \lt O(log(n)) \lt O(n) \lt O(n log(n)) \lt O(n^2) \lt O(n^3) \lt O(c^n) \lt O(n!)$$
 
 Como podemos observar, complexidades como $O(1)$ e $O(log(n))$ aumentam muito lentamente com o tamanho da entrada, tornando-os altamente eficientes.
 Já algoritmos com complexidades como $O(n^2)$, $O(2^n)$ e $O(n!)$ têm um crescimento muito mais rápido, o que torna esses algoritmos menos práticos para entradas grandes.
