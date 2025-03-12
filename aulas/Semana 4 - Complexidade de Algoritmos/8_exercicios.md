@@ -110,23 +110,23 @@ Calcule a complexidade dos algoritmos abaixo:
 7. Soma dos elementos de um vetor
     ```c
     float soma(float *arr, int n) {
-    	float total = 0;
-    	for (int i = 0; i < n; i++) {
-    		total += arr[i];
+        float total = 0;
+        for (int i = 0; i < n; i++) {
+            total += arr[i];
         }
-    	return total;
+        return total;
     }
     ```
 
 8. Busca sequencial
     ```c
     int buscaSequencial(int *arr, int n, int x) {
-    	for (int i = 0; i < n; i++){
-    		if (arr[i] == x) {
-    			return i;
+        for (int i = 0; i < n; i++){
+            if (arr[i] == x) {
+                return i;
             }
-    	}
-    	return -1;
+        }
+        return -1;
     }
     ```
 
@@ -137,13 +137,13 @@ Calcule a complexidade dos algoritmos abaixo:
             return ‐1;
         }
 
-    	int m = (i + j) / 2;
-    	if (arr[m] == x) {
+        int m = (i + j) / 2;
+        if (arr[m] == x) {
             return m;
         } else if ( x < arr[m] ) {
             return buscaBinaria (arr, x, i, m‐1);
         } else {
-    		return buscaBinaria (arr, x, m+1, j);
+            return buscaBinaria (arr, x, m+1, j);
         }
     }
     ```
@@ -151,14 +151,14 @@ Calcule a complexidade dos algoritmos abaixo:
 10. Multiplicação de matrizes
     ```c
     void multiplicacaiMatriz(float **a, float **b, int n, int p, int m, float **x) {
-    	for (int i = 0; i < n; i++) {
-    		for (int j = 0; j < m; j++) {
-    			x[i][j] = 0.0;
-    			for (int k = 0; k < p; k++) {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                x[i][j] = 0.0;
+                for (int k = 0; k < p; k++) {
                     x[i][j] += a[i][k] * b[k][j];
                 }
-    		}
-    	}
+            }
+        }
     }
     ```
 
