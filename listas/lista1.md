@@ -42,7 +42,7 @@ Os arquivos devem ser organizados da seguinte maneira:
 * As funções devem ser implementadas nos arquivos descritos acima.
 * As funções devem seguir as assinaturas estabelecidas para cada exercício.
 * Será atribuído nota 0 caso o programa não compile.
-* Use o namespace `PatientArray` para todas as funções.
+* Use o namespace `PatientArrayTAD` para todas as funções.
 * Utilize boas práticas de programação, incluindo:
     - Documentação das funções (comentários explicativos sobre sua funcionalidade).
     - Verificações básicas (evitar acessos inválidos à memória, checagem de ponteiros nulos, etc.).
@@ -131,7 +131,7 @@ void removePatient(PatientArray *pa, int index);
 
 ## Exercício 6: Remoção e Retorno do Próximo Paciente
 
-Crie uma função que encontre o paciente mais urgente e o remova da lista, retornando o objeto `Patient` por referência.\
+Crie uma função que encontre o paciente mais urgente e o remova da lista, retornando o objeto `Patient` por valor.\
 **Dica:** Utilize a função `findNextPatient` para encontrar o índice do paciente antes de removê-lo.
 
 **Definição da função:**
