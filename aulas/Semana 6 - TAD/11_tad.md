@@ -11,22 +11,26 @@ Além disso, essa estimativa pode frequentemente estar incorreta, levando à res
 Já implementamos uma melhoria para o primeiro problema ao criarmos um array dinâmico cujo tamanho muda de acordo com o número de elementos inseridos e removidos.
 O problema é que isso ainda não resolve completamente a questão, pois não há garantia de que será necessário todo esse espaço adicional.
 
-Devido a essa limitação, uma nova estrutura de dados alternativa chamada **Lista Encadeada** foi criada, cujo objetivo é permitir a inserção e remoção de dados de forma eficiente.
+Devido a isso, apresentaremos uma estrutura de dados alternativa ao array chamada  **Lista Encadeada**, cujo objetivo é permitir a inserção e remoção de dados de forma mais eficiente.
 Claro que, como veremos mais adiante, ela também apresenta suas próprias limitações.
 
 ---
 
 ## 2. Lista Encadeada Simples
 
-Durante as aulas de C, vimos que é possível alocar qualquer estrutura de dados dinamicamente. Então, e se, em vez de alocarmos um array inteiro, alocássemos uma estrutura para armazenar apenas um elemento da lista por vez?
+### 2.1 O que é?
 
-Ou seja, toda vez que desejássemos inserir um objeto, criaríamos um **nó** que armazena esse dado.
+Durante as aulas de C, aprendemos que é possível alocar dinamicamente qualquer estrutura de dados.
+E se, em vez de alocarmos um array inteiro, criássemos uma estrutura que armazena um único elemento de cada vez?
 
-Dessa forma, teríamos um conjunto de nós independentes uns dos outros, o que facilita a inserção e remoção de elementos dessa estrutura.
+Nesse modelo, a cada `inserção`, criamos um nó que armazena o dado desejado.
 
-A grande questão é: como indicar a ordem entre esses nós? Basta adicionar um ponteiro!
+Essa abordagem resulta em um conjunto de nós independentes, permitindo uma inserção e remoção de elementos mais flexível.
 
-### 2.1 Casos de uso
+O desafio, então, é: como manter a ordem de inserção entre os nós?
+A solução é simples: basta adicionar um ponteiro!
+
+### 2.2 Casos de uso
 
 1. **Implementação de Filas e Pilhas**:
 Estruturas como filas e pilhas podem ser implementadas eficientemente com listas encadeadas simples, onde a inserção e remoção ocorrem em um único extremo.
@@ -34,7 +38,7 @@ Estruturas como filas e pilhas podem ser implementadas eficientemente com listas
 Algumas tabelas hash utilizam listas encadeadas simples para armazenar múltiplos valores que colidem na mesma posição.
 
 
-### 2.2 Estrutura de Dados
+### 2.3 Estrutura de Dados
 
 ```cpp
 struct Node {
@@ -48,29 +52,52 @@ struct SingleLinkedList {
 };
 ```
 
-### 2.3 Operações
+### 2.4 Operações
 
 #### Inicialização
 ```cpp
 SingleLinkedList* createList() {
-    SingleLinkedList* list = new SingleLinkedList{nullptr, 0};
+    SingleLinkedList* list = new SingleLinkedList{};
+    list->head = nullptr;
+    list->size = 0;
     return list;
 }
 ```
 
-#### Inserir no Início
+#### Inserir
+
 ```cpp
 void insertFront(SingleLinkedList* list, int value) {
-    Node* newNode = new Node{value, list->head};
+    Node* newNode = new Node{};
+    newNode->value = value;
+    newNode->next = list->head;
+    
     list->head = newNode;
+    list->size++;
+}
+
+void insertEnd(SingleLinkedList* list, int value) {
+    Node* newNode = new Node{};
+    newNode->value = value;
+    newNode->next = nullptr;
+    
+    if(list->head == nullptr) {
+        list->head = newNode;
+    } else {
+        Node* temp = list->head;
+        while(temp != nullptr) {
+            temp = temp->next;
+        }
+        temp->next = newNode;
+    }
     list->size++;
 }
 ```
 
-#### Remover do Início
+#### Remover
 ```cpp
 void removeFront(SingleLinkedList* list) {
-    if (!list->head) {
+    if (list->head == nullptr) {
         return;
     }
 
@@ -79,21 +106,18 @@ void removeFront(SingleLinkedList* list) {
     delete temp;
     list->size--;
 }
-```
 
-#### Remover do Meio
-```cpp
 void removeMiddle(SingleLinkedList* list, int value) {
-    if (!list->head) {
+    if (list->head == nullptr) {
         return;
     }
     
     Node* current = list->head;
-    while (current->next && current->next->value != value) {
+    while (current->next != nullptr && current->next->value != value) {
         current = current->next;
     }
 
-    if (!current->next) {
+    if (current->next == nullptr) {
         return;
     }
 
@@ -104,19 +128,21 @@ void removeMiddle(SingleLinkedList* list, int value) {
 }
 ```
 
-#### Busca
+#### Buscar
 ```cpp
 bool search(SingleLinkedList* list, int value) {
     Node* current = list->head;
-    while (current) {
-        if (current->value == value) return true;
+    while (current != nullptr) {
+        if (current->value == value) {
+            return true;
+        }
         current = current->next;
     }
     return false;
 }
 ```
 
-### 2.4 Lista Circular
+### 2.5 Lista Circular
 
 Para torná-la circular, basta fazer o último nó apontar para o primeiro.
 
@@ -124,13 +150,17 @@ Para torná-la circular, basta fazer o último nó apontar para o primeiro.
 
 ## 3. Lista Duplamente Encadeada
 
+### 3.1 O que é?
+
 Uma limitação da lista encadeada simples é que ela só vê o próximo elemento, o que é problemático em situações como:
 * Remoção de um nó;
 * Verificação do elemento anterior.
 
 Como resolver isso? Basta adicionar um segundo ponteiro para o nó anterior!
 
-### 3.1 Casos de uso
+<img src="./11_doubly_linked_list.png" width="800"/>
+
+### 3.2 Casos de uso
 
 1. **Editor de Texto**:
 Um editor de texto pode armazenar cada linha como um nó em uma lista duplamente encadeada, permitindo edições eficientes no meio do texto.
@@ -141,7 +171,7 @@ Deques podem ser implementadas de forma eficiente com listas duplamente encadead
 3. **Navegação em Aplicações (como Histórico de Navegação)**:
 Navegadores podem utilizar listas duplamente encadeadas para permitir navegação para frente e para trás entre páginas.
 
-### 3.2 Estrutura de Dados
+### 3.3 Estrutura de Dados
 
 ```cpp
 struct Node {
@@ -157,68 +187,104 @@ struct DoubleLinkedList {
 };
 ```
 
-### Operações
+### 3.4 Operações
 
-<img src="./11_doubly_linked_list.png" width="800"/>
-
-#### Inserir no Início
+#### Inserir
 
 ```cpp
 void insertFront(DoubleLinkedList* list, int value) {
-    Node* newNode = new Node{value, list->head, nullptr};
-    if (list->head) {
+    Node* newNode = new Node{};
+    newNode->value = value;
+    newNode->next = list->head;
+    newNode->prev = nullptr;
+
+    if (list->head != nullptr) {
         list->head->prev = newNode;
     }
     list->head = newNode;
-    if (!list->tail) {
+    
+    if (list->tail == nullptr) {
         list->tail = newNode;
     }
+
     list->size++;
 }
+
+void insertEnd(DoubleLinkedList* list, int value) {
+    Node* newNode = new Node{};
+    newNode->value = value;
+    newNode->next = list->head;
+    newNode->prev = nullptr;
+
+    if (list->head == nullptr) {
+        list->head = newNode;
+    }
+
+    if (list->tail != nullptr) {
+        list->tail->next = newNode;
+    }
+    list->tail = newNode;
+
+    list->size++;
+}
+
 ```
 
-#### Remover do Fim
+#### Remover
 
 ```cpp
+void removeFront(DoubleLinkedList* list) {
+    if (list->head == nullptr) {
+        return;
+    }
+
+    Node* temp = list->head;
+    list->head = list->head->next;
+    if (list->head != nullptr) {
+        list->head->prev = nullptr;
+    } else {
+        list->tail = nullptr;
+    }
+    delete temp;
+    list->size--;
+}
+
+void removeMiddle(DoubleLinkedList* list, int value) {
+    if (list->head == nullptr) {
+        return;
+    }
+
+    Node* current = list->head;
+    while (current != nullptr && current->value != value) {
+        current = current->next;
+    }
+
+    if (current == nullptr) {
+        return;
+    }
+
+    current->prev->next = current->next;
+    if (current->next != nullptr) {
+        current->next->prev = current->prev;
+    }
+
+    delete current;
+    list->size--;
+}
+
 void removeEnd(DoubleLinkedList* list) {
-    if (!list->tail) {
+    if (list->tail == nullptr) {
         return;
     }
 
     Node* temp = list->tail;
     list->tail = list->tail->prev;
-    if (list->tail) {
+    if (list->tail != nullptr) {
         list->tail->next = nullptr;
     } else {
         list->head = nullptr;
     }
     delete temp;
-    list->size--;
-}
-```
-
-#### Remover do Meio
-```cpp
-void removeMiddle(DoubleLinkedList* list, int value) {
-    if (!list->head) {
-        return;
-    }
-
-    Node* current = list->head;
-    while (current && current->value != value) {
-        current = current->next;
-    }
-
-    if (!current) {
-        return;
-    }
-
-    current->prev->next = current->next;
-    if (current->next) {
-        current->next->prev = current->prev;
-    }
-
-    delete current;
     list->size--;
 }
 ```
@@ -265,4 +331,3 @@ Embora listas encadeadas sejam flexíveis e eficientes para inserção e remoç�
 * ✅ Boa escolha quando a quantidade de elementos pode variar significativamente.
 * ✅ Inserções e remoções são eficientes, pois não exigem deslocamento de elementos.
 * ❌ Acesso a elementos individuais é mais lento, pois requer percorrer a lista.
-
