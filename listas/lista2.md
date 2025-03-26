@@ -7,7 +7,7 @@ Em um banco, há apenas um caixa, e os clientes devem ser atendidos por ordem de
 1. O atendimento ocorre na ordem de chegada, respeitando as regras de prioridade.
 2. No máximo **dois idosos** podem ser atendidos antes que uma pessoa da fila geral seja atendida.
 
-### Exemplo de Funcionamento
+### 1) Exemplo de Funcionamento
 
 Suponha que as seguintes pessoas entrem na fila antes do início do atendimento:
 
@@ -28,6 +28,28 @@ A ordem de atendimento, seguindo as regras estabelecidas, será:
 Saída:
 3 4 1 5 7 2 6
 ```
+
+### 2) Exemplo de Funcionamento
+
+Suponha que as seguintes pessoas entrem na fila antes do início do atendimento:
+
+```
+Entrada:
+1 Idoso
+2 Idoso
+3 Idoso
+4 Geral
+5 Geral
+6 Idoso
+```
+
+A ordem de atendimento, seguindo as regras estabelecidas, será:
+
+```
+Saída:
+1 2 3 4 6 5
+```
+
 
 ## Entregável
 O trabalho deve ser enviado conforme as seguintes especificações:
@@ -51,6 +73,7 @@ struct QueueNode {
    Client client;
    QueueNode* next;
    QueueNode* previous;
+   <Demais variáveis a serem definidas>
 };
 
 struct WaitingQueue {
