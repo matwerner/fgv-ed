@@ -75,7 +75,7 @@ Ordem atual: [1, 2, 4, 3, 7, 5, 6]
    - Ainda não há nenhum idoso entre pessoas 5 e 6, então pessoa 8 entra antes da 6.
 
 ```
-Ordem atual: [1, 2, 3, 4, 7, 8, 5, 6]
+Ordem atual: [1, 2, 4, 3, 7, 5, 8, 6]
 ```
 
 ## Entregável
