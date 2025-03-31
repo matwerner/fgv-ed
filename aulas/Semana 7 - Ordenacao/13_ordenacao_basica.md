@@ -34,27 +34,33 @@ Diferente da busca linear, que verifica elemento por elemento, a busca binária 
 
 ```cpp
 int binarySearch(int arr[], int n, int x) {
-    int left = 0;
-    int right = n - 1;
+    int left = 0;                                // Custo | Vezes
+    int right = n - 1;                           // 1     | 1
 
-    while (left <= right) {
-        int mid = left + (right - left) / 2;
+    while (left <= right) {                      // 2     | k
+        int mid = left + (right - left) / 2;     // 1     | k
 
-        // Verificar se o elemento alvo está no meio
-        if (arr[mid] == x) {
-            return mid; // Retorna o índice do elemento encontrado
+        if (arr[mid] == x) {                     // 1     | k
+            return mid;                          // 1     | 1
         }
 
-        // Ajustar os limites com base na comparação
-        if (arr[mid] < x) {
-            left = mid + 1; // Foco na metade direita
+        // Ajustar os limites
+        if (arr[mid] < x) {                      // 1     | k
+            left = mid + 1; // Metade direita    // 1     | k
         } else {
-            right = mid - 1; // Foco na metade esquerda
+            right = mid - 1; // Metade esquerda  // 1     | k
         }
     }
 
-    return -1; // Retorna -1 se o elemento não for encontrado
+    return -1; // Elemento não foi encontrado    // 1     | 1
 }
+
+// Tamanho do array a cada uma das k passadas
+// #0: n
+// #1: n/2
+// #2: n/4
+// ...
+// #k: n/2^k = 1
 ```
 
 #### Complexidade
@@ -117,23 +123,25 @@ Vamos explorar três algoritmos fundamentais, destacando suas características e
 #### Algoritmo
 
 ```c
-void selectionSort(int arr[], int n) {
-    int minIndex, temp;
+void selectionSort(int arr[], int n) {      // Custo  | Vezes
+    int minIndex, temp;                     // 2      | 1
 
     // Percorrer o array
-    for (int i = 0; i < n - 1; i++) {
-        // Encontrar o menor elemento na parte não ordenada
-        minIndex = i;
-        for (int j = i + 1; j < n; j++) {
-            if (arr[j] < arr[minIndex]) {
-                minIndex = j;
+    for (int i = 0; i < n - 1; i++) {       // 2      | n-1
+        // Encontrar o menor elemento
+        // na parte não ordenada
+        minIndex = i;                       // 1      | n-1
+        for (int j = i + 1; j < n; j++) {   // 2      | n-i+1 -> n-1, n-2, ..., 1
+            if (arr[j] < arr[minIndex]) {   // 1      | n-i+1 -> n-1, n-2, ..., 1
+                minIndex = j;               // 1      | n-i+1 -> n-1, n-2, ..., 1
             }
         }
 
-        // Trocar o menor elemento com o primeiro elemento
-        temp = arr[minIdx];
-        arr[minIdx] = arr[i];
-        arr[i] = temp;
+        // Trocar o menor elemento 
+        // com o primeiro elemento
+        temp = arr[minIdx];                 // 1      | n-1
+        arr[minIdx] = arr[i];               // 1      | n-1
+        arr[i] = temp;                      // 1      | n-1
     }
 }
 ```
@@ -155,18 +163,17 @@ void selectionSort(int arr[], int n) {
 
 #### Algoritmo
 ```cpp
-void insertionSort(int arr[], int n) {
-    int current;
-    for (int i = 1; i < n; i++) {
-        current = arr[i];
-        j = i - 1;
+void insertionSort(int arr[], int n) {         // Custo  | Vezes
+    int i, j, current;                         // 3      | 1
+    for (i = 1; i < n; i++) {                  // 2      | n 
+        current = arr[i];                      // 1      | n-1
+        j = i - 1;                             // 1      | n-1
 
-        // Mover os elementos maiores que "current" uma posição à frente
-        while (int j >= 0 && arr[j] > current) {
-            arr[j+1] = arr[j];
-            j-=1;
+        while (j >= 0 && arr[j] > current) {   // 3      | i-1 -> 0, 1, 2, ..., n-2
+            arr[j+1] = arr[j];                 // 1      | i-1 -> 0, 1, 2, ..., n-2
+            j = j - 1;                         // 1      | i-1 -> 0, 1, 2, ..., n-2
         }
-        arr[j+1] = current;
+        arr[j+1] = current;                    // 1      | n-1
     }
 }
 ```
@@ -193,14 +200,15 @@ void insertionSort(int arr[], int n) {
 
 ```cpp
 void bubbleSort(int arr[], int n) {
-    int temp;
-    for (int i = 0; i < n - 1; i++) {
-        for (int j = 0; j < n - i - 1; j++) {
-            if (arr[j] > arr[j + 1]) {
-                // Trocar os elementos adjacentes se estiverem na ordem errada
-                temp = arr[j];
-                arr[j] = arr[j + 1];
-                arr[j + 1] = temp;
+    int temp;                                     // Custo | Vezes
+    for (int i = 0; i < n - 1; i++) {             // 2     | n-1
+        for (int j = 0; j < n - i - 1; j++) {     // 2     | n-i-1 -> n-1, n - 2, ..., 1
+            if (arr[j] > arr[j + 1]) {            // 1     | n-i-1 -> n-1, n - 2, ..., 1
+                // Trocar os elementos adjacentes
+                // se estiverem na ordem errada
+                temp = arr[j];                    // 1     | n-i-1 -> n-1, n - 2, ..., 1
+                arr[j] = arr[j + 1];              // 1     | n-i-1 -> n-1, n - 2, ..., 1
+                arr[j + 1] = temp;                // 1     | n-i-1 -> n-1, n - 2, ..., 1
             }
         }
     }
