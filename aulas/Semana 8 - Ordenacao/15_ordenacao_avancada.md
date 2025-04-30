@@ -251,14 +251,109 @@ Vantagens:
 * Altamente paralelizável: as divisões podem ser feitas em paralelo.
 
 Desvantagens:
-* Não é um algoritmo in-place: precisa de memória adicional proporcional ao tamanho da entrada ($O(n)$).
+* Não é um algoritmo in-place: precisa de memória adicional proporcional ao tamanho da entrada ( $O(n)$ ).
 * A gestão de memória (alocação e desalocação) pode impactar o desempenho para entradas muito grandes.
 
 ### E é possível fazer melhor?
 
 Será que existe uma abordagem que:
-* Seja tão eficiente quanto Merge Sort ($O(n\log⁡(n))$),
-* Mas que use memória constante ($O(1)$)?
+* Seja tão eficiente quanto Merge Sort ( $O(n\log⁡(n))$ ),
+* Mas que tenha complexidade de memória menor que ( $O(n)$ )?
 
-Sim!
-Essa é justamente a ideia do Quick Sort, que vamos estudar na disciplina de Análise de Algoritmos.
+Sim! Essa é justamente a ideia do Quick Sort.
+
+## 5. Quick sort
+
+### Intuição do Quick Sort
+
+Imagine que queremos ordenar um array. Ao invés de quebrar o array pela metade (como no `Merge Sort`), escolhemos um elemento chamado `pivô` e tentamos colocar-lo no seu devido lugar — ou seja, de forma que todos os elementos menores que o pivô fiquem à esquerda e todos os maiores fiquem à direita.
+
+Essa etapa de "organizar os menores à esquerda e os maiores à direita" se chama particionamento (partition).
+
+A mágica é que, depois de fazer isso, sabemos exatamente onde o pivô deve ficar no array ordenado.
+E o restante? Podemos aplicar o mesmo raciocínio recursivamente à esquerda e à direita do pivô.
+
+<img src="./15_quick_sort_partition.png" width="800"/>
+
+(Fonte: https://runestone.academy/ns/books/published/pythonds/SortSearch/TheQuickSort.html)
+
+### Implementação
+
+#### Partition
+
+```cpp
+int partition(int arr[], int low, int high) {
+    int pivot = arr[low]; // Escolhe o primeiro elemento como pivô
+    int left = low + 1;
+    int right = high;
+
+    while (true) {
+        // Avança até achar um elemento maior que o pivô
+        while (left <= right && arr[left] <= pivot) {
+            left++;
+        }
+
+        // Retrocede até achar um elemento menor que o pivô
+        while (left <= right && arr[right] > pivot) {
+            right--;
+        }
+
+        if () {
+            break;
+        }
+
+        std::swap(arr[left], arr[right]);
+    }
+
+    std::swap(arr[low], arr[right]); // Coloca o pivô em seu lugar
+    return right;
+}
+```
+
+#### Quick sort
+
+```cpp
+void quickSort(int arr[], int low, int high) {
+    if (low < high) {
+        int pi = partition(arr, low, high); // Usa a nova versão
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
+    }
+}
+```
+
+### Análise de Complexidade
+
+Vamos analisar o comportamento do algoritmo:
+
+* Melhor caso (pivô divide o array ao meio):
+    → Cada partição tem tamanho $n/2$, e fazemos log(n) partições → Complexidade: $O(n\log(n))$
+
+* Pior caso (pivô é o menor ou maior elemento):
+    → Array vira quase todo de um lado → Complexidade: $O(n^2)$
+    → (Exemplo: array já ordenado e pivô mal escolhido)
+
+* Média dos casos (pivôs razoavelmente balanceados):
+    → Complexidade esperada: $O(n\log(n))$
+
+### Como escolher o pivot?
+
+Escolher um bom pivô é essencial!
+* Pivô fixo (ex: primeiro ou último elemento): Simples, mas pode ser ruim em casos degenerados.
+* Pivô aleatório (randomizado): Altamente recomendado! Ele evita esses piores casos com alta probabilidade.
+
+#### Mas por que o pivô aleatório funciona?
+
+Imagine que o pivô é escolhido aleatoriamente em um array de tamanho n.
+A chance de ele cair em uma posição "razoável" (por exemplo, entre os $25\%$ e $75\%$ da lista) é bem alta — cerca de $50\%$ ou mais.
+Ou seja, a cada chamada recursiva, há uma boa chance de você estar dividindo o problema bem, o que mantém a complexidade próxima de $O(n\log(n))$ com alta frequência.
+
+### Complexidade de memória
+
+A primeira vista, o Quick Sort parece ter complexidade de memória $O(1)$, já que não usamos vetores auxiliares.
+De fato:
+* Não há alocação de novos arrays como no Merge Sort;
+* Mas... usamos recursão, e cada chamada ocupa um quadro de pilha (stack frame).
+
+No pior caso (partições desequilibradas), isso pode resultar em até $O(n)$ chamadas recursivas na pilha.
+No melhor caso (partições equilibradas), o uso da pilha é $O(\log(n))$.
