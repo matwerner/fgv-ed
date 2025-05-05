@@ -346,6 +346,15 @@ Exemplo visual a ser utilizado abaixo:
   3   7
 ```
 
+Resumo:
+
+| Tipo de Travessia      | Ordem dos Nós Visitados | Descrição                                                                 |
+|------------------------|-------------------------|---------------------------------------------------------------------------|
+| **Em largura (BFS)**   | 10 → 5 → 15 → 3 → 7     | Visita **nível por nível**, da esquerda para a direita                    |
+| **Pré-ordem (DFS)**    | 10 → 5 → 3 → 7 → 15     | Visita o nó atual **antes** dos filhos: Raiz → Esquerda → Direita         |
+| **Em-ordem (DFS)**     | 3 → 5 → 7 → 10 → 15     | Visita o nó atual **entre** os filhos: Esquerda → Raiz → Direita (ordena BST) |
+| **Pós-ordem (DFS)**    | 3 → 7 → 5 → 15 → 10     | Visita o nó atual **após** os filhos: Esquerda → Direita → Raiz           |
+
 ### 6.1 BFS: Breadth-First Search (Busca em Largura ou por Níveis)
 
 Aqui, percorremos a árvore nível por nível, da esquerda para a direita:
