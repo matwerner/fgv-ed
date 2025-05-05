@@ -55,13 +55,13 @@ Essa estrutura representa uma árvore com vários nós ligados de forma hierárq
     É o nó mais alto da hierarquia, o único que não tem pai. Toda árvore tem exatamente uma raiz.
     Ex: no exemplo acima, `A` é a raiz.
 
-* Filho (child)**:\
+* **Filho (child)**:\
     Um nó diretamente ligado abaixo de outro. Ex: `B` e `C` são filhos de `A`.
 
-* Pai (parent)**:\
+* **Pai (parent)**:\
     Um nó diretamente ligado acima de outro. Ex: `A` é pai de `B` e `C`.
 
-* Irmãos (siblings)**:\
+* **Irmãos (siblings)**:\
     Nós que compartilham o mesmo pai. Ex: `B` e `C` são irmãos; `D` e `E` também.
 
 * **Folha (leaf)**:\
