@@ -50,7 +50,7 @@ Implemente duas formas diferentes de exibir uma árvore binária no terminal:
 
 - A. **Na horizontal**, com indentação proporcional à profundidade.
 	```
-		        8
+				8
 			7
 		3
 			6
