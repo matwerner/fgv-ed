@@ -86,11 +86,18 @@ D. O nó `9` fosse **inserido**
 Implemente uma função que receba a raiz de uma árvore binária e verifique se ela é uma ABB.
 
 ## Q6. Caminho de busca
-Implemente uma função que, dada uma chave `k` e a raiz de uma ABB, **retorne o caminho** percorrido até encontrar a chave.  
-Se a chave não estiver na árvore, retorne o caminho até a falha da busca.
+Implemente uma função que, dada uma chave `k` e a raiz de uma ABB, **exiba no terminal o caminho** percorrido até encontrar a chave.  
+Se a chave não estiver na árvore, exiba o caminho até a falha da busca.
 
 ## Q7. Inserção com altura mínima
 Dado um vetor ordenado de chaves, escreva uma função que construa uma ABB com **altura mínima**.  
 
 ## Q8. Filtragem de maiores valores
-Implemente uma função que, dada uma ABB e um valor `x`, **retorne todos os nós com valor maior que `x`**, **sem percorrer nós desnecessários**.
+Implemente uma função que, dada uma ABB e um valor `x`, **exiba todos os nós com valor maior que `x`**, **sem percorrer nós desnecessários**.
+
+## Q9. Diferença absoluta mínima
+
+Dada uma árvore binária de busca e um valor-alvo `k`, implemente uma função que **encontre o nó cujo valor tem a menor diferença absoluta** com `k`.
+
+Exemplo:
+Se a ABB contém os valores `{10, 22, 14, 26, 5}` e `k = 12`, o nó mais próximo é `10` (diferença de 2) ou `14` (diferença de 2).
