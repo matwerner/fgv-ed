@@ -76,7 +76,7 @@ Cada palavra é armazenada como um "nó" na estrutura de dados (por exemplo, uma
 
 | Entrega           | Conteúdo                                            | Data  |
 | ----------------- | --------------------------------------------------- | ----- |
-| **Entrega 0**     | Envio dos integrantes do grupo (por e-mail)         | 20/05 |
+| **Entrega 0**     | Envio dos integrantes do grupo (por e-mail)         | 23/05 |
 | **Entrega 1**     | BST funcional + leitura dos dados + CLI (Busca)     | 04/06 |
 | **Entrega 2**     | AVL funcional + CLI (Estatísticas)                  | 11/06 |
 | **Entrega Final** | Projeto completo + relatório + scripts e instruções | 18/06 |
