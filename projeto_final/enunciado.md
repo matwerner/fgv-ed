@@ -113,7 +113,7 @@ O desenvolvimento deve seguir as etapas abaixo:
         * `std::string` para armazenar as palavras.
         * `chrono` para cálculo de tempo.
         * `iostream` para escrita na stdout.
-        * `fstream` para leitura dos arquivos;
+        * `fstream` para leitura dos arquivos.
     * As funções mínimas obrigatórias para cada estrutura estão descritas na seção de “Funcionalidades Mínimas”.
 
 3. Interface por Linha de Comando (CLI)
@@ -196,7 +196,7 @@ struct SearchResult {
 * `BinaryTree* create()`
 * `InsertResult insert(BinaryTree* tree, const std::string& word, int documentId)`
 * `SearchResult search(BinaryTree* tree, const std::string& word)`
-* `void deleteTree(BinaryTree* tree)`
+* `void destroy(BinaryTree* tree)`
 
 > Usar `BST::`, `AVL::` e `RBT::` como namespaces, conforme a estrutura.
 
