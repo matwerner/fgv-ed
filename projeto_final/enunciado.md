@@ -112,6 +112,8 @@ O desenvolvimento deve seguir as etapas abaixo:
         * `std::vector` para armazenar os IDs dos documentos.
         * `std::string` para armazenar as palavras.
         * `chrono` para cálculo de tempo.
+        * `iostream` para escrita na stdout.
+        * `fstream` para leitura dos arquivos.
     * As funções mínimas obrigatórias para cada estrutura estão descritas na seção de “Funcionalidades Mínimas”.
 
 3. Interface por Linha de Comando (CLI)
@@ -194,7 +196,7 @@ struct SearchResult {
 * `BinaryTree* create()`
 * `InsertResult insert(BinaryTree* tree, const std::string& word, int documentId)`
 * `SearchResult search(BinaryTree* tree, const std::string& word)`
-* `void delete(BinaryTree* tree)`
+* `void destroy(BinaryTree* tree)`
 
 > Usar `BST::`, `AVL::` e `RBT::` como namespaces, conforme a estrutura.
 
@@ -211,8 +213,8 @@ struct SearchResult {
     ```
 * `void printTree(BinaryTree* tree)`
     ```bash
-    algoritmo
-    ├── arvore
+    arvore
+    ├── algoritmo
     └── memoria
         ├── lista
         └── vetor
