@@ -269,7 +269,7 @@ void heapifyDown(Heap* heap, int current) {
 
 ## 5. Construindo Heaps
 
-É muito comum, ao desejarmos trabalhar com heaps, já termos em mãos todos os elementos e querermos transformá-los rapidamente em uma estrutura válida de heap — ou seja, uma árvore onde cada elemento respeita a propriedade de heap (max-heap ou min-heap).
+É muito comum, ao desejarmos trabalhar com heaps, já termos em mãos todos os elementos e querermos transformá-los rapidamente em uma estrutura válida de heap - ou seja, uma árvore onde cada elemento respeita a propriedade de heap (max-heap ou min-heap).
 
 Por isso, é importante analisarmos o custo computacional de **construir uma heap** a partir de um vetor de elementos arbitrários.
 
@@ -279,7 +279,7 @@ Por isso, é importante analisarmos o custo computacional de **construir uma hea
 - Insira um a um todos os `n` elementos usando a operação de inserção vista anteriormente.
 - Cada elemento é colocado no final e sobe até encontrar sua posição (via `heapifyDown`).
 
-**Custo:**   $ O(n \cdot \log n) $
+**Custo:**   $O(n \cdot \log n)$
 
 **Intuição:**  
 - Cada inserção pode levar até `O(log n)` comparações.
