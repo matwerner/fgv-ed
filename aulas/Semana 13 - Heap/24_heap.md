@@ -292,11 +292,13 @@ Por isso, é importante analisarmos o custo computacional de **construir uma hea
 - Se corrigirmos todos os nós internos (índices `n/2 - 1` até `0`) usando `heapifyDown`, garantimos que a estrutura resultante é um heap.
 - Fazemos isso de **baixo para cima**, garantindo que ao ajustarmos um nó, seus filhos já estejam corretos.
 
+<img src="./24_heap_heapify.png" width="800"/>
+
 ### 5.3 Análise do Custo (Manipulação)
 
 Vamos calcular o custo total de `heapifyDown` para todos os nós internos.
 
-Considere uma árvore cheia com altura $ h $. Ela terá:
+Considere uma árvore cheia com altura $h$. Ela terá:
 
 $$
 n = 2^{h+1} - 1
@@ -304,11 +306,11 @@ $$
 
 Agora, vejamos quantos nós há em cada nível e quanto custa ajustar cada um deles:
 
-- A raiz (nível 0): $ 1 \cdot h $
-- Nível 1: $ 2 \cdot (h - 1) $
-- Nível 2: $ 4 \cdot (h - 2) $
+- A raiz (nível 0): $1 \cdot h$
+- Nível 1: $2 \cdot (h - 1)$
+- Nível 2: $4 \cdot (h - 2)$
 - ...
-- Nível $ h - 1 $: $ 2^{h-1} \cdot 1 $
+- Nível $h - 1 $: $2^{h-1} \cdot 1$
 
 Logo, temos a soma:
 
