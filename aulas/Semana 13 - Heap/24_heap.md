@@ -352,3 +352,130 @@ T(n) = n - h - 1= O(n)
 $$
 
 Portanto, construir uma heap usando o algoritmo **bottom-up** tem custo linear.
+
+## 6. HeapSort
+
+Considere o seguinte algoritmo:
+
+```cpp
+void heapSort(int* arr, int n) {
+    Heap* heap = buildMaxHeap(arr, n); // Função mágica que constroi um max-heap
+
+    for(int i = n - 1; i >= 0; i++) {
+        int top = heap->data[0];
+        remove(heap)
+        arr[i] = top;
+    }
+    
+    destroy(heap);
+}
+```
+
+Esse algoritmo utiliza a estrutura de Heap para realizar uma ordenação conhecida como **HeapSort**.
+
+A ideia é a seguinte:
+1. Construímos um max-heap com os elementos do array.
+2. Repetidamente removemos o maior elemento (no topo da heap) e o colocamos no final do array.
+3. Ao final, o array estará ordenado em ordem crescente.
+
+### 6.1 Complexidade
+
+A construção do heap (com o algoritmo bottom-up) leva tempo $O(n)$, e cada uma das $n$ remoções leva tempo $O(\log n)$. Portanto, a complexidade total do HeapSort é:
+
+$$
+O(n + n \log n) = O(n \log n)
+$$
+
+Ou seja, sua complexidade é semelhante à do Merge Sort e do Quick Sort (no melhor caso).
+
+### 6.2 Implementação in-place
+
+Apesar de muitas implementações utilizarem uma abordagem **out-of-place** (isto é, alocando uma nova estrutura de heap), o HeapSort pode ser implementado **in-place**.
+Isso é possível porque a representação em array da heap permite reaproveitar o próprio vetor original para manter a estrutura de heap durante as operações.
+
+Essa característica faz com que o HeapSort seja uma alternativa interessante quando não podemos gastar memória extra para realizar a ordenação.
+
+## 7. Fila de Prioridade
+
+Ao introduzir heaps, mencionamos que um dos seus principais usos é na Fila de Prioridade.
+
+### 7.1 O que é?
+
+Durante a A1, falamos por cima sobre o que eram filas de prioridade, porém sendo um pouco mais formal:
+
+Uma fila de prioridade é uma estrutura de dados que - como o nome diz - processa uma sequência de elementos de acordo com a prioridade associada a cada um deles.
+Em outras palavras, é como se ordenássemos os elementos por ordem de prioridade e retirássemos sempre o mais prioritário.
+
+Uma informação que estava faltando, no entanto, é que na prática **a prioridade é mutável**.
+
+**Exemplos:**
+- Um sistema operacional que altera a prioridade de processos com base em uso de CPU.
+- Um jogo em que a urgência de ações muda com o tempo ou com o contexto.
+
+### 7.2 Mudando a prioridade
+
+Para lidar com mudanças de prioridade, precisamos de uma nova operação: `changeKey`.
+
+```cpp
+void changeKey(Heap* heap, int i, int newKey) {
+    int key = heap->data[i];
+    heap->data[i] = newKey;
+    if (newKey > key) {
+        heapifyUp(heap, i);
+    } else {
+        heapifyDown(heap, i);
+    }
+}
+```
+
+Assim como as demais operações, `changeKey` tem um custo computacional de $O(\log n)$.
+
+**Mas existe um detalhe importante:**  
+Como saber a posição `i` do elemento cuja prioridade precisa ser alterada?
+
+Descobrir essa posição pode custar $O(n)$ no pior caso, se precisarmos varrer todo o heap para encontrar o elemento.
+
+### 7.3 Possível abordagem
+
+Para resolver isso, uma solução comum é **usar uma estrutura auxiliar junto ao heap** que mantém um mapeamento entre algum identificador único do elemento e sua posição atual no vetor.
+
+Essa estrutura auxiliar pode ser um **mapa** (`map`), implementado com:
+- Árvores balanceadas (como AVL ou Rubro-Negra, vistas em aula)
+- Tabelas de espalhamento (hash tables)
+
+**Exemplo ilustrativo:**
+
+```cpp
+Heap {
+    CustomElement* data;
+    int capacity;
+    int size;
+    Map map;
+}
+```
+
+O vetor `data` poderia conter:
+
+```json
+[
+    {"priority": 99, "name": "Evento A"},
+    {"priority": 50, "name": "Evento B"},
+    {"priority": 30, "name": "Evento C"},
+    {"priority": 15, "name": "Evento D"}
+]
+```
+
+E o mapa associado seria:
+
+```json
+{
+    "Evento A": 0,
+    "Evento B": 1,
+    "Evento C": 2,
+    "Evento D": 3
+}
+```
+
+Assim, ao querermos alterar a prioridade de "Evento C", consultamos o mapa e encontramos rapidamente sua posição no vetor.
+
+Com isso, garantimos que a operação changeKey permaneça eficiente mesmo com prioridades mutáveis.
