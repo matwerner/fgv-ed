@@ -903,8 +903,6 @@ Em resumo:
 * inserção exige, no máximo, uma rotação simples ou dupla;
 * remoção pode exigir várias rotações sucessivas.
 
-Pode. Abaixo está uma seção **6.4** pronta para encaixar depois da seção **6.3 Por que a remoção pode exigir várias rotações**.
-
 ### 6.4 Exemplo de remoção exigindo mais de uma rotação
 
 Considere a seguinte Árvore AVL:
